@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Railway Ticket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Book Railway Ticket</h2>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="selectedStation">Station Name of Departure:</label>
+            <input type="text" class="form-control" id="selectedStation" required>
+        </div>
+        <div class="form-group">
+            <label for="destination">Destination:</label>
+            <input type="text" class="form-control" id="destination" required>
+        </div>
+        <div class="form-group">
+            <label for="destkm">Distance to Destination (km):</label>
+            <input type="number" class="form-control" id="destkm" required>
+        </div>
+        <div class="form-group">
+            <label for="passengerName">Passenger Name:</label>
+            <input type="text" class="form-control" id="passengerName" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Preferred Time of Departure:</label>
+            <input type="time" class="form-control" id="time" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date for Ticket Reservation:</label>
+            <input type="date" class="form-control" id="date" required>
+        </div>
+        <div class="form-group">
+            <label>Classes Available:</label>
+            <div>
+                <select class="form-control" id="class" required>
+                    <option value="1A">First AC (1A) - 200 Rs additional</option>
+                    <option value="EA">Second Class AC (EA) - 150 Rs additional</option>
+                    <option value="3E">Sleeper (3E) - No additional charges</option>
+                    <option value="2A">Third Class AC (2A) - 100 Rs additional</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="train">Train Name:</label>
+            <input type="text" class="form-control" id="train" required>
+        </div>
+        <div class="form-group">
+            <label for="trainno">Train No:</label>
+            <input type="number" class="form-control" id="trainno" required>
+        </div>
+        <div class="form-group">
+            <label for="ticno">Number of Tickets Needed:</label>
+            <input type="number" class="form-control" id="ticno" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Book Ticket</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#bookingForm').on('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        
+        const bookingData = {
+            selectedStation: $('#selectedStation').val(),
+            destination: $('#destination').val(),
+            destkm: parseInt($('#destkm').val()),
+            passengerName: $('#passengerName').val(),
+            time: $('#time').val(),
+            date: $('#date').val(),
+            class: $('#class').val(),
+            train: $('#train').val(),
+            trainno: parseInt($('#trainno').val()),
+            ticno: parseInt($('#ticno').val())
+        };
+
+        // Make an AJAX request to your server to process the booking
+        $.ajax({
+            url: '/user/bookticket', // Adjust the URL according to your backend endpoint
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(bookingData),
+            success: function(response) {
+                alert('Ticket booked successfully! Booking Summary: ' + JSON.stringify(response));
+            },
+            error: function(error) {
+                alert('Error booking ticket: ' + error.responseText);
+            }
+        });
+    });
+</script>
+</body>
+</html>

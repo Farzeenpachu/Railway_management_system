@@ -1,0 +1,61 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable only if there are rows in the table
+        if ($('#myTable').length > 0 && $('#myTable tbody tr').length > 0) {
+            $('#myTable').DataTable();
+        }
+    });
+</script>
+
+<div class="content-header">
+    <div>
+        <h2 class="content-title card-title">Stations</h2>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            {{#if stations.length}}
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Station</th>
+                        <th>Location</th>
+                        <th>Platform</th>
+                        <th>Train</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each stations}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td><b>{{this.station}}</b></td>
+                        <td>{{this.location}}</td>
+                        <td>{{this.platform}}</td>
+                        <td>{{this.train}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <p class="text-center">No stations available at the moment.</p>
+            {{/if}}
+        </div> <!-- table-responsive //end -->
+    </div> <!-- card-body end// -->
+</div> <!-- card end// -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable only if there are rows in the table
+        if ($('#myTable').length > 0 && $('#myTable tbody tr').length > 0) {
+            $('#myTable').DataTable();
+        }
+    });
+</script>

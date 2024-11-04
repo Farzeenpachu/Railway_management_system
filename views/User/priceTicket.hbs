@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Railway Ticket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Book Railway Ticket</h2>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="destkm">Distance to Destination (km):</label>
+            <input type="number" class="form-control" id="destkm" required>
+        </div>
+        <div class="form-group">
+            <label>Classes Available:</label>
+            <select class="form-control" id="class" required>
+                <option value="1A">First AC (1A) - 200 Rs additional</option>
+                <option value="EA">Second Class AC (EA) - 150 Rs additional</option>
+                <option value="3E">Sleeper (3E) - No additional charges</option>
+                <option value="2A">Third Class AC (2A) - 100 Rs additional</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ticno">Number of Tickets Needed:</label>
+            <input type="number" class="form-control" id="ticno" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="price" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate Price</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#bookingForm').on('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        
+        const Pricecal = {
+            destkm: parseInt($('#destkm').val()),
+            class: $('#class').val(),
+            ticno: parseInt($('#ticno').val())
+        };
+
+        console.log('Pricecal object:', Pricecal); // Debugging log to check the values being sent
+
+        // Make an AJAX request to your server to calculate the ticket price
+        $.ajax({
+            url: '/user/ticketprice', // Ensure this matches your backend route
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(Pricecal),
+            success: function(response) {
+                console.log('Server response:', response); // Log the server response
+                
+                // Check if response has a price field
+                if (response.price !== undefined) {
+                    $('#price').val(response.price); // Set the value of the price input
+                    console.log('Price updated to:', response.price); // Confirm the price update
+                } else {
+                    alert('Price could not be calculated.');
+                }
+            },
+            error: function(error) {
+                console.error('Error details:', error); // Log the error details
+                alert('Error calculating price: ' + error.responseText);
+                $('#price').val(0); // Reset price field on error
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Search</title>
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Search for Train</h1>
+        <form id="trainSearchForm" onsubmit="event.preventDefault(); searchTrain();">
+            <div>
+                <label for="trainInput">Enter Train Name:</label>
+                <input type="text" id="trainInput" required>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        function searchTrain() {
+            const trainName = document.getElementById('trainInput').value;
+
+            $.ajax({
+                url: 'api/searchtrain?train_Name=' + encodeURIComponent(trainName),
+                type: 'GET',
+                success: function(response) {
+                    // Clear previous results
+                    document.getElementById('result').innerHTML = '';
+
+                    // Display train details
+                    const trainDetails = `
+                        <h3>Train Details:</h3>
+                        <p><strong>Train No:</strong> ${response.train_no}</p>
+                        <p><strong>Current Station:</strong> ${response.destination}</p>
+                        <p><strong>First Class Seats Reserved:</strong> ${response.first_class_seats}</p>
+                        <p><strong>Second Class Seats Reserved:</strong> ${response.secondClassSeats}</p>
+                        <p><strong>Third Class Seats Reserved:</strong> ${response.third_class_seats}</p>
+                        <p><strong>Sleeper Class Seats Reserved:</strong> ${response.sleeper_class_seats}</p>
+                    `;
+                    document.getElementById('result').innerHTML = trainDetails;
+                },
+                error: function(xhr) {
+                    if (xhr.status === 404) {
+                        document.getElementById('result').innerHTML = '<p style="color:red;">Train not found</p>';
+                    } else {
+                        document.getElementById('result').innerHTML = `<p style="color:red;">Error: ${xhr.responseText}</p>`;
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<link rel="stylesheet" href="/stylesheets/userhome.css" />
+  <div class="login_form">
+    <!-- Login form container -->
+    <form action="user/submit" method="post" role="form" enctype="application/x-www-form-urlencoded">
+      <h3>User Sign In</h3>
+
+      <div class="login_option">
+        <!-- Google button -->
+        <div class="option">
+          <a href="#">
+            <img src="/logos/google.png" alt="Google" />
+            <span>Google</span>
+          </a>
+        </div>
+
+        <!-- Apple button -->
+        <div class="option">
+          <a href="#">
+            <img src="/logos/apple.png" alt="Apple" />
+            <span>Apple</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Login option separator -->
+      <p class="separator">
+        <span>or</span>
+      </p>
+
+      <!-- First Name input box -->
+      <div class="input_box">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" required />
+      </div>
+
+      <!-- Last Name input box -->
+      <div class="input_box">
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required />
+      </div>
+
+      <!-- Email input box -->
+      <div class="input_box">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter email address" required />
+      </div>
+
+      <!-- Password input box -->
+      <div class="input_box">
+        <div class="password_title">
+          <label for="pw">Password</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <input type="password" name="pw" id="pw" placeholder="Enter your password" required />
+      </div>
+
+      <!-- Confirm Password input box -->
+      <div class="input_box">
+        <label for="pw_confirm">Confirm Password</label>
+        <input type="password" name="pw_confirm" id="pw_confirm" placeholder="Confirm your password" required />
+      </div>
+
+      <!-- Submit and login button -->
+      <button type="submit" class="btn">Submit</button>
+      <a href="user/login" class="btn link-btn">Login</a>
+
+      <p class="sign_up">Don't have an account? <a href="#">Sign up</a></p>
+    </form>
+  </div>

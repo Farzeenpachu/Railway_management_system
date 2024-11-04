@@ -1,0 +1,47 @@
+/* Container to center content */
+*{
+    margin: 0px;
+    padding: 0px;
+  
+    border: none;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* Center the card horizontally */
+    justify-content: center;
+    height: 100vh;         /* Full viewport height */
+    text-align: center;
+    
+}
+
+/* Styling for the title */
+.title {
+    margin-bottom: 20px;   /* Adds space between the title and the card */
+    font-size: 24px;
+    color: #333;
+}
+
+.card {
+    padding: 20px;
+ 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    text-align: center;
+
+
+}
+
+#user-btn{
+    margin-top: 20px;
+    width: 100px;
+}
+#admin-btn{
+    margin-top: 20px;
+    width: 100px;
+}
+#signin{
+    margin-top: 10px;
+}

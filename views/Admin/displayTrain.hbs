@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<div class="content-header">
+    <div>
+        <h2 class="content-title card-title">Trains</h2>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Train Name</th>
+                        <th>Train No</th>
+                        <th>Destination</th>
+                        <th>Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#if trains.length}}
+                    {{#each trains}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td><b>{{this.train_name}}</b></td>
+                        <td>{{this.train_no}}</td>
+                        <td>{{this.destination}}</td>
+                        <td>{{this.class}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+                {{else}}
+                <p>No trains available.</p>
+                {{/if}}
+            </table>
+        </div> <!-- table-responsive //end -->
+    </div> <!-- card-body end// -->
+</div> <!-- card end// -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
